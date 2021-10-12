@@ -19,6 +19,13 @@ module.exports = {
         "grayish-cyan": "hsl(180, 8%, 52%)",
         "grayish-cyan-dark": "hsl(180, 14%, 20%)",
       },
+      backgroundImage: {
+        "bg-header-desktop": `url('${process.env.NEXT_PUBLIC_PREFIX}/images/bg-header-desktop.svg')`,
+        "bg-header-mobile": `url('${process.env.NEXT_PUBLIC_PREFIX}/images/bg-header-mobile.svg')`,
+      },
+      fontSize: {
+        xss: ["0.6rem", { lineHeight: "0.8rem" }],
+      },
     },
   },
   variants: {

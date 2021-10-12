@@ -1,8 +1,13 @@
+import { ListItem } from "../components/ListItem";
+import { jobs } from "../data";
 const Index = () => {
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="shadow-2xl rounded-lg bg-gray-300 border-gray-500 border-2 w-72 p-4 space-y-4">
-        hi
+    <div className="w-screen">
+      <div className="bg-de-saturated-cyan h-40 bg-cover bg-bg-header-mobile sm:bg-bg-header-desktop"></div>
+      <div className="px-6 sm:px-40 py-10 space-y-12 sm:space-y-6 bg-background">
+        {jobs.map((job) => (
+          <ListItem item={job} key={job.id} />
+        ))}
       </div>
     </div>
   );
