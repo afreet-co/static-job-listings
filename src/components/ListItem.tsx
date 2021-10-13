@@ -1,12 +1,11 @@
 import React, { FC } from "react";
-import { Job } from "../data";
+import { useAppContext } from "../contexts/AppContext";
 
 export const ListItem: FC<{ item: Job }> = ({
   item: {
     company,
     contract,
     featured,
-    id,
     languages,
     level,
     location,
@@ -47,10 +46,10 @@ export const ListItem: FC<{ item: Job }> = ({
             )}
           </div>
         </div>
-        <h5 className="sm:text-lg text-base font-bold text-grayish-cyan-dark">
+        <h5 className="sm:text-lg text-base font-bold text-grayish-cyan-dark cursor-pointer hover:text-de-saturated-cyan">
           {position}
         </h5>
-        <div className="flex items-center text-grayish-cyan justify-between sm:justify-start sm:space-x-4 pb-4 sm:pb-0">
+        <div className="flex items-center text-grayish-cyan justify-start space-x-2 sm:space-x-4 pb-4 sm:pb-0">
           <span className="text-sm">{postedAt}</span>
           <div className="h-1 w-1 bg-grayish-cyan rounded-full"></div>
           <span className="text-sm">{contract}</span>
@@ -59,20 +58,28 @@ export const ListItem: FC<{ item: Job }> = ({
         </div>
       </div>
       <div className="flex-1 items-center flex sm:space-x-4 flex-wrap sm:flex-nowrap justify-start sm:justify-end">
-        <JobChip>{role}</JobChip>
-        <JobChip>{level}</JobChip>
+        <JobChip text={role} />
+        <JobChip text={level} />
         {languages.map((language) => (
-          <JobChip key={language}>{language}</JobChip>
+          <JobChip key={language} text={language} />
+        ))}
+
+        {tools.map((tool) => (
+          <JobChip key={tool} text={tool} />
         ))}
       </div>
     </div>
   );
 };
 
-export const JobChip: FC = ({ children }) => {
+export const JobChip: FC<{ text: string }> = ({ text }) => {
+  const { addFilter } = useAppContext();
   return (
-    <button className="p-2 rounded bg-background text-de-saturated-cyan text-xs font-bold mt-4 sm:mt-0 mr-4 sm:mr-0">
-      {children}
+    <button
+      onClick={() => addFilter(text)}
+      className="p-2 rounded bg-background text-de-saturated-cyan text-xs font-bold mt-4 sm:mt-0 mr-4 sm:mr-0 hover:bg-de-saturated-cyan hover:text-background transition-all duration-150"
+    >
+      {text}
     </button>
   );
 };
